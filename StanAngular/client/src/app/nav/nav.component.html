@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-secondary">
+    <div class="container">
+        
+        <img src='assets/Home.png' class="homeslika" routerLink='/'>
+      <ul class="navbar-nav mr-auto">
+        
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/login'routerLinkActive="active" *ngIf="(accountService.currentUser$ | async) === null"></a>
+          </li>
+          <ng-container *ngIf="accountService.currentUser$ | async">
+          <li class="nav-item">
+            <a class="nav-link" routerLink='/members' routerLinkActive="active">Stanovi</a>
+          </li>
+          
+          
+          <li  class="nav-item">
+            <a class="nav-link" routerLink='/apEdit' routerLinkActive="active">Uredjivanje stanova</a>
+          </li>
+          <li *appHasRole='["Admin"]' class="nav-item">
+            <a class="nav-link" routerLink='/admin' routerLinkActive="active">Admin</a>
+          </li>
+
+        </ng-container>
+      </ul>
+
+      <div class="dropdown" *ngIf="(accountService.currentUser$ | async) as user" dropdown> 
+        <a class="dropdown-toggle text-light"dropdownToggle>Dobrodošli {{user.userName | titlecase}}</a> 
+        <div class="dropdown-menu mt-3" *dropdownMenu>
+          <div class="dropdown divider"></div>
+          <a class="dropdown item"(click)="logout()">Odjava</a>
+        </div>
+      </div>
+
+      <form *ngIf="(accountService.currentUser$ | async) === null" #loginForm="ngForm" class="form-inline mt-2 mt-md-0" (ngSubmit)="login()" autocomplete="off">
+        <input
+        name="username"
+        [(ngModel)]="model.username" 
+        class="form-control mr-sm-2" 
+        type="text" 
+        placeholder="Korisničko ime">
+        <input
+        name="password"
+        [(ngModel)]="model.password" 
+        class="form-control mr-sm-2" 
+        type="password" 
+        placeholder="Lozinka">
+        <button class="btn btn-primary my-2 my-sm-0" type="submit">Prijava</button>
+      </form>
+      <button class="btn btn-primary my-2 my-sm-0" name="btn" (click)="btnClick();" *ngIf="(accountService.currentUser$ | async) === null">Registriraj se</button>
+    </div>
+  </nav>

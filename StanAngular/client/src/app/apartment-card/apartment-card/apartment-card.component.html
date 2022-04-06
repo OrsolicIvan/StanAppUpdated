@@ -1,0 +1,57 @@
+<div class="bg-secondary kartica2" >
+    <div class="card-img-wrapper dimenzije">
+        <img src="{{apartment.photos[0]?.url}}" onerror="this.src='assets/NoImage.png'" class="slikta">
+
+    </div>
+    <div class="app-card-text">
+   
+    <p>  <i class="fa fa-solid fa-info"></i> Detaljne informacije </p>
+    </div>
+
+
+    <table class="table table-hover">
+        
+        <tbody>
+            <tr class="table-active"   >
+                <th scope="row"><h3>Mjesečna stanarina</h3></th>
+                <td style="text-align:center"><input class=" forma form-control form-control-sm" type="text" value="{{apartment.monthlyPrice}}" id="inputLarge"></td>
+            </tr>
+            <tr class="table-active" >
+                <th scope="row"><h3>Broj soba</h3></th>
+                <td style="text-align:center"><input class=" forma form-control form-control-sm" type="number" value="{{apartment.numberOfRooms}}" id="inputLarge"></td>
+            </tr>
+            <tr class="table-active" >
+                <th scope="row"><h3>Opis stana</h3></th>
+                <td style="text-align:center"><input class=" forma form-control form-control-sm" type="text" value="{{apartment.apartmentDescription}}" id="inputLarge"></td>
+            </tr>
+            <tr class="table-active" >
+                <th scope="row"><h3>Zauzet</h3></th>
+                <td style="text-align:center"></td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+
+
+
+
+    <div class="form-group">
+        
+        
+    <div class="card-body p-2">
+        <button mat-raised-button color="primary" routerLink='/photo-upload' routerLinkActive="active">Uredi</button>
+        <button mat-raised-button color="primary" style="margin-left: 5px" (click)="registerToggle3()">Dodaj Adresu</button>
+        <p class="kartica card-title text-center mb-1">
+        </p>
+    </div>
+
+    <div *ngIf="registerShow" class="container">
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <app-adding-adress (cancelRegister)="cancelRegisterMode($event)"></app-adding-adress>
+            </div>
+        </div>
+    </div>
+
+</div>
